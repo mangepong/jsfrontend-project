@@ -1,0 +1,15 @@
+.card {
+    width: 40%;
+    margin: auto;
+    margin-top: 5%;
+}
+
+@media screen and (max-width: 992px) {
+    .card {
+        margin-top: 0%;
+        width: 100%;
+    }
+    .form-group {
+        padding-top: 17%;
+    }
+}
