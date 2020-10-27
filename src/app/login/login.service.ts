@@ -15,7 +15,7 @@ export class LoginService {
     ) { }
 
     login(email, password) {
-          return this.http.post(`http://localhost:1337/login`, {email: email, password: password})
+          return this.http.post(`https://project-api.mangepongjs.me/login`, {email: email, password: password})
               .pipe(map(user => {
                   localStorage.setItem('user', JSON.stringify(user));
                   return user;

@@ -4,6 +4,9 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
+import { FundsComponent } from './funds/funds.component';
+import { CreateObjectComponent } from './create-object/create-object.component';
+import { MypageComponent } from './mypage/mypage.component';
 
 const routes: Routes = [
     { path: '', component: LoginComponent },
@@ -11,6 +14,9 @@ const routes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'login', component: LoginComponent },
     { path: 'logout', component: LogoutComponent },
+    { path: 'deposit', component: FundsComponent },
+    { path: 'list', component: CreateObjectComponent },
+    { path: 'mypage', component: MypageComponent },
 ];
 
 @NgModule({

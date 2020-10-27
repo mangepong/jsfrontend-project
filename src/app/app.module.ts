@@ -13,6 +13,9 @@ import { FormsModule } from "@angular/forms";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LogoutComponent } from './logout/logout.component';
+import { FundsComponent } from './funds/funds.component';
+import { CreateObjectComponent } from './create-object/create-object.component';
+import { MypageComponent } from './mypage/mypage.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { LogoutComponent } from './logout/logout.component';
     HomeComponent,
     RegisterComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    FundsComponent,
+    CreateObjectComponent,
+    MypageComponent
   ],
   imports: [
     BrowserModule,

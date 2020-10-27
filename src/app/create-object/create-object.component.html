@@ -1,0 +1,27 @@
+<div class="card">
+    <h4 class="card-header">Create listing</h4>
+    <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="objname">Title</label>
+                <input type="text" formControlName="objname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.objname.errors }" />
+                <div *ngIf="submitted && f.objname.errors" class="invalid-feedback">
+                    <div *ngIf="f.objname.errors.required">Name is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input type="text" formControlName="price" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.price.errors }" />
+                <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
+                    <div *ngIf="f.price.errors.required">Price is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button [disabled]="loading" class="btn btn-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Create
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -22,7 +22,36 @@ export class LoginComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-      this.form = this.formBuilder.group({
+        if (!localStorage.getItem("user")) {
+            var logout = document.getElementById("logout");
+            var logout2 = document.getElementById("logout2");
+            var logout3 = document.getElementById("logout1");
+            var login3 = document.getElementById("login3");
+            var login2 = document.getElementById("login2");
+            var login = document.getElementById("login");
+            // logout.style.display = "None";
+            // logout2.style.display = "None";
+            // logout3.style.display = "None";
+            login3.style.display = "None";
+            login2.style.display = "None";
+            login.style.display = "None";
+        } else {
+            this.router.navigate(['/home'], { relativeTo: this.route, queryParamsHandling: 'preserve' });
+            var logout = document.getElementById("logout");
+            var logout2 = document.getElementById("logout2");
+            var logout3 = document.getElementById("logout1");
+            var login3 = document.getElementById("login3");
+            var login2 = document.getElementById("login2");
+            var login = document.getElementById("login");
+            logout.style.display = "None";
+            logout2.style.display = "None";
+            logout3.style.display = "None";
+            login3.style.display = "None";
+            login2.style.display = "None";
+            login.style.display = "None";
+        }
+
+        this.form = this.formBuilder.group({
             email: ['', Validators.required],
             password: ['', Validators.required]
         });

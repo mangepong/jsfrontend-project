@@ -7,14 +7,14 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class RegisterService {
+export class CreateObjectService {
 
     constructor(
         private router: Router,
         private http: HttpClient
-    ) {}
+    ) { }
 
-    register(email, password, name) {
-        return this.http.post(`https://project-api.mangepongjs.me/register`, {email: email, password: password, name: name});
+    create(name, objectname, price) {
+        return this.http.post(`https://project-api.mangepongjs.me/create`, {name: name, objectname: objectname, price: price});
     }
 }

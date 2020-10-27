@@ -1,8 +1,32 @@
-<div class="info">
+<div class="accInfo">
     <ng-template [ngIf]="username">
         <h3 id="title">{{ username.data.username }}</h3>
     </ng-template>
-    <!-- <ng-template [ngIf]="reports">
-        <div id="content" [innerHTML]="reports.data.text"></div>
-    </ng-template> -->
+    <ng-template [ngIf]="funds">
+        <p id="title">Current funds: {{ funds.data.funds }}kr</p>
+    </ng-template>
+</div>
+
+<div class="card">
+    <div class="listing">
+        <h3 class="listHeader"> Listings </h3>
+
+        <ul *ngFor="let item of objects | keyvalue">
+            <li class="list">
+                <form [formGroup]="form" (ngSubmit)="onSubmit(username.data.username, item.value.user, item.value.objectname, item.value.price, funds.data.funds)">
+                    <div class="form-group">
+                        <h3>Title: {{item.value.objectname | json}}</h3><br>
+                        <div class="desc">
+                            Price: {{item.value.price | json}}kr<br><br>
+                            Listed by: {{item.value.user | json}}
+                        </div>
+                        <button [disabled]="loading" class="btn btn-primary">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                            Buy
+                        </button>
+                    </div>
+                </form>
+            </li>
+        </ul>
+    </div>
 </div>

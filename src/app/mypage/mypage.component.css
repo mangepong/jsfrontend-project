@@ -1,13 +1,28 @@
+/* ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+} */
+
+/* .listing {
+    width: 100%;
+    margin: auto;
+}
+
+.list {
+    margin-top: 2%;
+    width: 100%;
+} */
+
 .card {
+    /* margin-top: 0%; */
     border: none;
 }
 
 .btn {
-    float: right;
-    padding: 1px 10px;
-    background-color: rgb(31, 232, 27);
-    border-color: green;
-    color: black;
+    display: inline-block;
+    margin-left: 9%;
+    margin-bottom: 3%;
 }
 
 @media screen and (max-width: 992px) {
@@ -35,10 +50,5 @@
     .form-group {
         width: 100%;
         margin: auto;
-    }
-
-    .btn {
-        width: 30%;
-        padding: 10px 10px;
     }
 }

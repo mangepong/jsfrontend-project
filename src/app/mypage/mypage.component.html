@@ -1,0 +1,28 @@
+<div class="accInfo">
+    <ng-template [ngIf]="username">
+        <h3 id="title">{{ username.data.username }}</h3>
+    </ng-template>
+    <ng-template [ngIf]="funds">
+        <p id="title">Current funds: {{ funds.data.funds }}kr</p>
+    </ng-template>
+</div>
+
+<div class="card">
+    <div class="listing">
+        <h3 class="listHeader"> My objects </h3>
+
+        <button (click)="onSubmit(username.data.username)" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Delete History
+        </button>
+        <ul *ngFor="let item of objects | keyvalue">
+            <li class="list" *ngFor="let item of objects.data.objects | keyvalue">
+                <div class="form-group">
+                    Listed by: {{item.value.seller | json}},
+                    Title: {{item.value.objectname | json}},
+                    Payed: {{item.value.price | json}}kr
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

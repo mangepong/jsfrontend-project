@@ -1,43 +1,31 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
-import * as io from "socket.io-client";
+import { MypageService } from '../mypage/mypage.service';
 import { HomeService } from '../home/home.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-const SOCKET_ENDPOINT = 'https://project-api.mangepongjs.me';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-mypage',
+  templateUrl: './mypage.component.html',
+  styleUrls: ['./mypage.component.css']
 })
-export class HomeComponent implements OnInit, OnChanges {
+export class MypageComponent implements OnInit {
 
     username: any;
     funds: any;
     objects: any;
-    form: FormGroup;
     loading = false;
     submitted = false;
-    socket;
 
     constructor(
         private accountService: HomeService,
+        private myService: MypageService,
         private route: ActivatedRoute,
         private router: Router,
-        private formBuilder: FormBuilder,
     ) { }
 
 
-    ngOnChanges() {
-        this.setupSocketConnection();
-    }
-
-
     ngOnInit() {
-        this.setupSocketConnection();
-
         if (!localStorage.getItem("user")) {
             this.router.navigate(['/login']);
             alert("You need to login first!");
@@ -55,6 +43,8 @@ export class HomeComponent implements OnInit, OnChanges {
             .subscribe((data) => {
                 localStorage.setItem('name', JSON.stringify(data));
             });
+            // this.form = this.formBuilder.group({
+            // });
         }
 
         var user = JSON.parse(localStorage.getItem('user'));
@@ -68,50 +58,28 @@ export class HomeComponent implements OnInit, OnChanges {
                 this.funds = data;
         });
 
-
-        this.form = this.formBuilder.group({
-
+        var name = JSON.parse(localStorage.getItem('name'));
+        this.myService.getObjects(name.data.username)
+            .subscribe((data) => {
+                this.objects = data;
         });
     }
 
-    get f() { return this.form.controls; }
-
-
-    onSubmit(buyer, name, objectname, price, deposit) {
-        this.setupSocketConnection();
-        console.log("PRESSED");
+    onSubmit(name) {
+        console.log("ASDASD");
         this.submitted = true;
 
-        if (this.form.invalid) {
-            return;
-        }
 
-
-        this.loading = true;
-
-        this.accountService.buyObjects(buyer, name, objectname, price, deposit)
+        this.myService.deleteObjects(name)
             .pipe(first())
             .subscribe({
                 next: () => {
-                    this.setupSocketConnection();
-                    this.router.navigate(['../mypage'], { relativeTo: this.route });
+                    this.router.navigate(['../home'], { relativeTo: this.route });
                 },
                 error: error => {
                     this.loading = false;
                     console.log("De gick skit");
                 }
             });
-
-    }
-
-
-    setupSocketConnection() {
-        console.log("SOCKET");
-        this.socket = io(SOCKET_ENDPOINT);
-        this.socket.emit('message', 'Hello there from Angular.');
-        this.socket.on('broadcast', (data: string) => {
-            this.objects = data;
-        });
-
     }
 }

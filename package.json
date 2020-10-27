@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "deploy": "ng build --prod && rsync -av dist/jsfrontend-project/* deploy@159.89.4.200:/var/www/project-frontend/html/"
   },
   "private": true,
   "dependencies": {
